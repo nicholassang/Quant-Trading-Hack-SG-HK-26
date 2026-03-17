@@ -4,6 +4,7 @@ import hmac
 import hashlib
 import os
 from dotenv import load_dotenv
+import json
 
 load_dotenv()  
 api_key = os.getenv("API_KEY")
@@ -215,7 +216,11 @@ if __name__ == "__main__":
     print("\n--- Getting Exchange Info ---")
     info = get_exchange_info()
     if info:
-        print(f"Available Pairs: {list(info.get('TradePairs', {}).keys())}")
+        pairs = list(info.get('TradePairs', {}).keys())
+        print(f"Available Pairs: {list(pairs)}")
+    with open("exchange.txt", "w") as file:
+        file.write("Available Pairs\n")
+        json.dump(pairs, file, indent=4)
 
     print("\n--- Getting Market Ticker (BTC/USD) ---")
     ticker = get_ticker("BTC/USD")
@@ -223,14 +228,31 @@ if __name__ == "__main__":
         print(ticker.get("Data", {}).get("BTC/USD", {}))
 
     print("\n--- Getting Account Balance ---")
-    print(get_balance())
+    balance = get_balance()
+    print(balance)
+    with open("balance.txt", "w") as file:
+        file.write("Bank Balance\n")
+        json.dump(balance, file, indent=4)
+        file.write("\n\n")
 
-    print("\n--- Checking Pending Orders ---")
-    print(get_pending_count())
-
+    print("\n--- Placing Orders ---")
     # Uncomment these to test trading actions:
     # print(place_order("BTC", "BUY", 0.01, price=95000))  # LIMIT
-    print(place_order("BNB/USD", "BUY", 1))      
-    print(place_order("BNB/USD", "SELL", 1))             # MARKET       
-    print(query_order(pair="BNB/USD", pending_only=False))
+    buy = place_order("BNB/USD", "BUY", 1)
+    print(buy)
+    # print(place_order("BNB/USD", "SELL", 1))             # MARKET   
+    query = query_order(pair="BNB/USD", pending_only=False)    
+    print(query)
     # print(cancel_order(pair="BNB/USD"))
+    with open("orders.txt", "w") as file:
+        file.write("Orders\n\n")
+        json.dump(buy, file, indent=4)
+        file.write("\n\nQuery Results\n\n")
+        json.dump(query, file, indent=4)
+
+    print("\n--- Checking Pending Orders ---")
+    pending = get_pending_count()
+    print(f"Pending Orders: {pending}")
+    with open("pending.txt", "a") as file:
+        file.write("Pending Orders\n")
+        json.dump(pending, file, indent=4)
