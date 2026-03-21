@@ -29,7 +29,11 @@ for pair, action in actions.items():
     amount_precision = trade_pairs_info[pair_on_exchange].get("AmountPrecision", 2)
 
     if action.upper() == "SELL":
-        balance = float(balances.get(coin, 0)) if balances else 0
+        balance = float(
+            balances.get("SpotWallet", {})
+            .get(coin, {})
+            .get("Free", 0)
+        )
         if balance > 0:
             ticker = get_ticker(pair_on_exchange)
             last_price = ticker.get("Data", {}).get(pair_on_exchange, {}).get("LastPrice", 0)
@@ -48,20 +52,43 @@ for pair, action in actions.items():
             print(f"No {coin} to sell, skipping SELL.")
 
     elif action.upper() == "BUY":
-        usd_to_spend = max(10, min_usd_order)
+    # Get USD balance
+        usd_balance = float(balances.get("SpotWallet", {}).get("USD", {}).get("Free", 0))
+
+        if usd_balance <= 0:
+            print(f"No USD available to buy {pair}, skipping.")
+            continue
+
+        # Use 20% of USD balance
+        usd_to_spend = usd_balance * 0.2
+
+        # Ensure minimum order requirement
+        if usd_to_spend < min_usd_order:
+            print(f"Adjusted USD to meet MiniOrder: {min_usd_order}")
+            usd_to_spend = min_usd_order
+
         ticker = get_ticker(pair_on_exchange)
         last_price = ticker.get("Data", {}).get(pair_on_exchange, {}).get("LastPrice", 0)
+
         if last_price <= 0:
             print()
             print(f"Skipping {pair}: cannot get valid last price.")
             print()
             continue
-        coin_qty = round(usd_to_spend / last_price, amount_precision)
+
+        # Compute coin quantity
+        coin_qty = usd_to_spend / last_price
+
+        # Round to allowed precision
+        coin_qty = round(coin_qty, amount_precision)
+
+        # Ensure order still meets MiniOrder after rounding
         if coin_qty * last_price < min_usd_order:
             coin_qty = round(min_usd_order / last_price, amount_precision)
             print(f"Adjusted coin quantity to meet MiniOrder: {coin_qty:.{amount_precision}f} {coin}")
+
         print()
-        print(f"Buying {coin_qty:.{amount_precision}f} {coin} (~${usd_to_spend}) for {pair}")
+        print(f"Buying {coin_qty:.{amount_precision}f} {coin} (~${usd_to_spend:.2f}, 20% of balance) for {pair}")
         result = place_order(coin, side="BUY", quantity=coin_qty)
         print(f"Order result: {result}")
         print()

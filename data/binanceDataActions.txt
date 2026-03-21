@@ -52,7 +52,7 @@
     "DOGEUSDT": "SELL",
     "CRVUSDT": "SELL",
     "ASTERUSDT": "SELL",
-    "TRXUSDT": "BUY",
+    "TRXUSDT": "SELL",
     "BMTUSDT": "SELL",
     "ZENUSDT": "SELL",
     "ONDOUSDT": "SELL",

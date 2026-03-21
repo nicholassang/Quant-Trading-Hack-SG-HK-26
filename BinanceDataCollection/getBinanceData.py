@@ -3,7 +3,7 @@ import json
 
 all_data = []
 
-dataPointsBack = 5
+dataPointsBack = 6
 
 with open("../data/exchange.txt", "r") as file:
     data = json.load(file)
