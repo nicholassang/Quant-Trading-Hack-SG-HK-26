@@ -2,6 +2,5 @@
 .venv
 log.txt
 pending.txt
-exchange.txt
 orders.txt
 balance.txt
