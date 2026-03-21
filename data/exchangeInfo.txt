@@ -1,0 +1,678 @@
+{
+    "InitialWallet": {
+        "USD": 50000
+    },
+    "IsRunning": true,
+    "TradePairs": {
+        "1000CHEEMS/USD": {
+            "AmountPrecision": 0,
+            "CanTrade": true,
+            "Coin": "1000CHEEMS",
+            "CoinFullName": "1000CHEEMS",
+            "MiniOrder": 1,
+            "PricePrecision": 6,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "AAVE/USD": {
+            "AmountPrecision": 3,
+            "CanTrade": true,
+            "Coin": "AAVE",
+            "CoinFullName": "AAVE",
+            "MiniOrder": 1,
+            "PricePrecision": 2,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "ADA/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "ADA",
+            "CoinFullName": "Cardano",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "APT/USD": {
+            "AmountPrecision": 2,
+            "CanTrade": true,
+            "Coin": "APT",
+            "CoinFullName": "APT",
+            "MiniOrder": 1,
+            "PricePrecision": 3,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "ARB/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "ARB",
+            "CoinFullName": "ARB",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "ASTER/USD": {
+            "AmountPrecision": 2,
+            "CanTrade": true,
+            "Coin": "ASTER",
+            "CoinFullName": "ASTER",
+            "MiniOrder": 1,
+            "PricePrecision": 3,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "AVAX/USD": {
+            "AmountPrecision": 2,
+            "CanTrade": true,
+            "Coin": "AVAX",
+            "CoinFullName": "AVAX",
+            "MiniOrder": 1,
+            "PricePrecision": 2,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "AVNT/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "AVNT",
+            "CoinFullName": "AVNT",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "BIO/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "BIO",
+            "CoinFullName": "BIO",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "BMT/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "BMT",
+            "CoinFullName": "BMT",
+            "MiniOrder": 1,
+            "PricePrecision": 5,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "BNB/USD": {
+            "AmountPrecision": 3,
+            "CanTrade": true,
+            "Coin": "BNB",
+            "CoinFullName": "Binance Coin",
+            "MiniOrder": 1,
+            "PricePrecision": 2,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "BONK/USD": {
+            "AmountPrecision": 0,
+            "CanTrade": true,
+            "Coin": "BONK",
+            "CoinFullName": "BONK",
+            "MiniOrder": 1,
+            "PricePrecision": 8,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "BTC/USD": {
+            "AmountPrecision": 5,
+            "CanTrade": true,
+            "Coin": "BTC",
+            "CoinFullName": "Bitcoin",
+            "MiniOrder": 1,
+            "PricePrecision": 2,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "CAKE/USD": {
+            "AmountPrecision": 2,
+            "CanTrade": true,
+            "Coin": "CAKE",
+            "CoinFullName": "CAKE",
+            "MiniOrder": 1,
+            "PricePrecision": 3,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "CFX/USD": {
+            "AmountPrecision": 0,
+            "CanTrade": true,
+            "Coin": "CFX",
+            "CoinFullName": "CFX",
+            "MiniOrder": 1,
+            "PricePrecision": 5,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "CRV/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "CRV",
+            "CoinFullName": "CRV",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "DOGE/USD": {
+            "AmountPrecision": 0,
+            "CanTrade": true,
+            "Coin": "DOGE",
+            "CoinFullName": "Dogecoin",
+            "MiniOrder": 1,
+            "PricePrecision": 5,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "DOT/USD": {
+            "AmountPrecision": 2,
+            "CanTrade": true,
+            "Coin": "DOT",
+            "CoinFullName": "DOT",
+            "MiniOrder": 1,
+            "PricePrecision": 3,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "EDEN/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "EDEN",
+            "CoinFullName": "EDEN",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "EIGEN/USD": {
+            "AmountPrecision": 2,
+            "CanTrade": true,
+            "Coin": "EIGEN",
+            "CoinFullName": "EigenLayer",
+            "MiniOrder": 1,
+            "PricePrecision": 3,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "ENA/USD": {
+            "AmountPrecision": 2,
+            "CanTrade": true,
+            "Coin": "ENA",
+            "CoinFullName": "Ethena",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "ETH/USD": {
+            "AmountPrecision": 4,
+            "CanTrade": true,
+            "Coin": "ETH",
+            "CoinFullName": "Ethereum",
+            "MiniOrder": 1,
+            "PricePrecision": 2,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "FET/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "FET",
+            "CoinFullName": "Fetch.AI",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "FIL/USD": {
+            "AmountPrecision": 2,
+            "CanTrade": true,
+            "Coin": "FIL",
+            "CoinFullName": "FIL",
+            "MiniOrder": 1,
+            "PricePrecision": 3,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "FLOKI/USD": {
+            "AmountPrecision": 0,
+            "CanTrade": true,
+            "Coin": "FLOKI",
+            "CoinFullName": "FLOKI",
+            "MiniOrder": 1,
+            "PricePrecision": 8,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "FORM/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "FORM",
+            "CoinFullName": "FORM",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "HBAR/USD": {
+            "AmountPrecision": 0,
+            "CanTrade": true,
+            "Coin": "HBAR",
+            "CoinFullName": "HBAR",
+            "MiniOrder": 1,
+            "PricePrecision": 5,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "HEMI/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "HEMI",
+            "CoinFullName": "HEMI",
+            "MiniOrder": 1,
+            "PricePrecision": 5,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "ICP/USD": {
+            "AmountPrecision": 2,
+            "CanTrade": true,
+            "Coin": "ICP",
+            "CoinFullName": "ICP",
+            "MiniOrder": 1,
+            "PricePrecision": 3,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "LINEA/USD": {
+            "AmountPrecision": 0,
+            "CanTrade": true,
+            "Coin": "LINEA",
+            "CoinFullName": "LINEA",
+            "MiniOrder": 1,
+            "PricePrecision": 5,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "LINK/USD": {
+            "AmountPrecision": 2,
+            "CanTrade": true,
+            "Coin": "LINK",
+            "CoinFullName": "ChainLink",
+            "MiniOrder": 1,
+            "PricePrecision": 2,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "LISTA/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "LISTA",
+            "CoinFullName": "LISTA",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "LTC/USD": {
+            "AmountPrecision": 3,
+            "CanTrade": true,
+            "Coin": "LTC",
+            "CoinFullName": "Litecoin",
+            "MiniOrder": 1,
+            "PricePrecision": 2,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "MIRA/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "MIRA",
+            "CoinFullName": "MIRA",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "NEAR/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "NEAR",
+            "CoinFullName": "NEAR",
+            "MiniOrder": 1,
+            "PricePrecision": 3,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "OMNI/USD": {
+            "AmountPrecision": 2,
+            "CanTrade": true,
+            "Coin": "OMNI",
+            "CoinFullName": "OMNI",
+            "MiniOrder": 1,
+            "PricePrecision": 2,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "ONDO/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "ONDO",
+            "CoinFullName": "ONDO",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "OPEN/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "OPEN",
+            "CoinFullName": "OPEN",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "PAXG/USD": {
+            "AmountPrecision": 4,
+            "CanTrade": true,
+            "Coin": "PAXG",
+            "CoinFullName": "PAXG",
+            "MiniOrder": 1,
+            "PricePrecision": 2,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "PENDLE/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "PENDLE",
+            "CoinFullName": "PENDLE",
+            "MiniOrder": 1,
+            "PricePrecision": 3,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "PENGU/USD": {
+            "AmountPrecision": 0,
+            "CanTrade": true,
+            "Coin": "PENGU",
+            "CoinFullName": "PENGU",
+            "MiniOrder": 1,
+            "PricePrecision": 6,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "PEPE/USD": {
+            "AmountPrecision": 0,
+            "CanTrade": true,
+            "Coin": "PEPE",
+            "CoinFullName": "Pepe",
+            "MiniOrder": 1,
+            "PricePrecision": 8,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "PLUME/USD": {
+            "AmountPrecision": 0,
+            "CanTrade": true,
+            "Coin": "PLUME",
+            "CoinFullName": "PLUME",
+            "MiniOrder": 1,
+            "PricePrecision": 5,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "POL/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "POL",
+            "CoinFullName": "Matic Network",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "PUMP/USD": {
+            "AmountPrecision": 0,
+            "CanTrade": true,
+            "Coin": "PUMP",
+            "CoinFullName": "PUMP",
+            "MiniOrder": 1,
+            "PricePrecision": 6,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "S/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "S",
+            "CoinFullName": "S",
+            "MiniOrder": 1,
+            "PricePrecision": 5,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "SEI/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "SEI",
+            "CoinFullName": "SEI",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "SHIB/USD": {
+            "AmountPrecision": 0,
+            "CanTrade": true,
+            "Coin": "SHIB",
+            "CoinFullName": "SHIBA INU",
+            "MiniOrder": 1,
+            "PricePrecision": 8,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "SOL/USD": {
+            "AmountPrecision": 3,
+            "CanTrade": true,
+            "Coin": "SOL",
+            "CoinFullName": "SOL",
+            "MiniOrder": 1,
+            "PricePrecision": 2,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "SOMI/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "SOMI",
+            "CoinFullName": "SOMI",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "STO/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "STO",
+            "CoinFullName": "STO",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "SUI/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "SUI",
+            "CoinFullName": "Sui",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "TAO/USD": {
+            "AmountPrecision": 4,
+            "CanTrade": true,
+            "Coin": "TAO",
+            "CoinFullName": "TAO",
+            "MiniOrder": 1,
+            "PricePrecision": 1,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "TON/USD": {
+            "AmountPrecision": 2,
+            "CanTrade": true,
+            "Coin": "TON",
+            "CoinFullName": "Toncoin",
+            "MiniOrder": 1,
+            "PricePrecision": 3,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "TRUMP/USD": {
+            "AmountPrecision": 3,
+            "CanTrade": true,
+            "Coin": "TRUMP",
+            "CoinFullName": "TRUMP",
+            "MiniOrder": 1,
+            "PricePrecision": 3,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "TRX/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "TRX",
+            "CoinFullName": "TRON",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "TUT/USD": {
+            "AmountPrecision": 0,
+            "CanTrade": true,
+            "Coin": "TUT",
+            "CoinFullName": "TUT",
+            "MiniOrder": 1,
+            "PricePrecision": 5,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "UNI/USD": {
+            "AmountPrecision": 2,
+            "CanTrade": true,
+            "Coin": "UNI",
+            "CoinFullName": "UNI",
+            "MiniOrder": 1,
+            "PricePrecision": 3,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "VIRTUAL/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "VIRTUAL",
+            "CoinFullName": "VIRTUAL",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "WIF/USD": {
+            "AmountPrecision": 2,
+            "CanTrade": true,
+            "Coin": "WIF",
+            "CoinFullName": "Dogwifhat",
+            "MiniOrder": 1,
+            "PricePrecision": 3,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "WLD/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "WLD",
+            "CoinFullName": "Worldcoin",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "WLFI/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "WLFI",
+            "CoinFullName": "WLFI",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "XLM/USD": {
+            "AmountPrecision": 0,
+            "CanTrade": true,
+            "Coin": "XLM",
+            "CoinFullName": "Stellar",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "XPL/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "XPL",
+            "CoinFullName": "XPL",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "XRP/USD": {
+            "AmountPrecision": 1,
+            "CanTrade": true,
+            "Coin": "XRP",
+            "CoinFullName": "XRP",
+            "MiniOrder": 1,
+            "PricePrecision": 4,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "ZEC/USD": {
+            "AmountPrecision": 3,
+            "CanTrade": true,
+            "Coin": "ZEC",
+            "CoinFullName": "Zcash",
+            "MiniOrder": 1,
+            "PricePrecision": 2,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        },
+        "ZEN/USD": {
+            "AmountPrecision": 2,
+            "CanTrade": true,
+            "Coin": "ZEN",
+            "CoinFullName": "Horizen",
+            "MiniOrder": 1,
+            "PricePrecision": 3,
+            "Unit": "USD",
+            "UnitFullName": "US Dollar"
+        }
+    }
+}

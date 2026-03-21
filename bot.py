@@ -1,257 +1,91 @@
-import requests
-import time
-import hmac
-import hashlib
-import os
-from dotenv import load_dotenv
 import json
+from util import get_balance, place_order, get_exchange_info, get_ticker, query_order
 
-load_dotenv()  
-api_key = os.getenv("API_KEY")
-secret_key = os.getenv("SECRET_KEY")
-print(api_key)  
-print(secret_key) 
+# -------------------------------
+# Load data and exchange info
+# -------------------------------
 
-# --- API Configuration ---
-BASE_URL = "https://mock-api.roostoo.com"
-API_KEY = api_key      
-SECRET_KEY = secret_key  
+with open("./data/binanceDataActions.txt", "r") as f:
+    actions = json.load(f)
 
+exchange_info = get_exchange_info()
+trade_pairs_info = exchange_info.get("TradePairs", {})
 
-# ------------------------------
-# Utility Functions
-# ------------------------------
+balances = get_balance()  # {"BTC": 0.5, "ETH": 1.2, "USD": 5000}
 
-def _get_timestamp():
-    """Return a 13-digit millisecond timestamp as string."""
-    return str(int(time.time() * 1000))
+# -------------------------------
+# Execute trades
+# -------------------------------
 
+for pair, action in actions.items():
+    coin = pair.replace("USDT", "")
+    pair_on_exchange = pair.replace("USDT", "/USD")
 
-def _get_signed_headers(payload: dict = {}):
-    """
-    Generate signed headers and totalParams for RCL_TopLevelCheck endpoints.
-    """
-    payload['timestamp'] = _get_timestamp()
-    sorted_keys = sorted(payload.keys())
-    total_params = "&".join(f"{k}={payload[k]}" for k in sorted_keys)
+    if pair_on_exchange not in trade_pairs_info:
+        print(f"Skipping {pair}: not available on exchange.")
+        continue
 
-    signature = hmac.new(
-        SECRET_KEY.encode('utf-8'),
-        total_params.encode('utf-8'),
-        hashlib.sha256
-    ).hexdigest()
+    min_usd_order = trade_pairs_info[pair_on_exchange].get("MiniOrder", 1.0)
+    amount_precision = trade_pairs_info[pair_on_exchange].get("AmountPrecision", 2)
 
-    headers = {
-        'RST-API-KEY': API_KEY,
-        'MSG-SIGNATURE': signature
-    }
+    if action.upper() == "SELL":
+        balance = float(balances.get(coin, 0)) if balances else 0
+        if balance > 0:
+            ticker = get_ticker(pair_on_exchange)
+            last_price = ticker.get("Data", {}).get(pair_on_exchange, {}).get("LastPrice", 0)
+            if last_price * balance < min_usd_order:
+                print()
+                print(f"Cannot SELL {coin}: order value ${last_price*balance:.2f} below MiniOrder ${min_usd_order}")
+                print()
+                continue
+            balance = round(balance, amount_precision)
+            print()
+            print(f"Selling ALL {balance} {coin} for {pair}")
+            result = place_order(coin, side="SELL", quantity=balance)
+            print(f"Order result: {result}")
+            print()
+        else:
+            print(f"No {coin} to sell, skipping SELL.")
 
-    return headers, payload, total_params
+    elif action.upper() == "BUY":
+        usd_to_spend = max(10, min_usd_order)
+        ticker = get_ticker(pair_on_exchange)
+        last_price = ticker.get("Data", {}).get(pair_on_exchange, {}).get("LastPrice", 0)
+        if last_price <= 0:
+            print()
+            print(f"Skipping {pair}: cannot get valid last price.")
+            print()
+            continue
+        coin_qty = round(usd_to_spend / last_price, amount_precision)
+        if coin_qty * last_price < min_usd_order:
+            coin_qty = round(min_usd_order / last_price, amount_precision)
+            print(f"Adjusted coin quantity to meet MiniOrder: {coin_qty:.{amount_precision}f} {coin}")
+        print()
+        print(f"Buying {coin_qty:.{amount_precision}f} {coin} (~${usd_to_spend}) for {pair}")
+        result = place_order(coin, side="BUY", quantity=coin_qty)
+        print(f"Order result: {result}")
+        print()
 
+# -------------------------------
+# Print final balances
+# -------------------------------
+balances = get_balance()
+print("\nUpdated wallet balances:")
+for coin, amt in balances.items():
+    print(f"{coin}: {amt}")
 
-# ------------------------------
-# Public Endpoints
-# ------------------------------
+# -------------------------------
+# Query all orders per pair
+# -------------------------------
+print("\nQuerying all orders for traded pairs... Please be patient as this may take a moment.")
+all_orders = {}
+for pair, _ in actions.items():
+    pair_on_exchange = pair.replace("USDT", "/USD")
+    queried = query_order(pair=pair_on_exchange)
+    all_orders[pair] = queried
 
-def check_server_time():
-    """Check API server time."""
-    url = f"{BASE_URL}/v3/serverTime"
-    try:
-        res = requests.get(url)
-        res.raise_for_status()
-        return res.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error checking server time: {e}")
-        return None
+# Save queried order data
+with open("./data/query_order_results.txt", "w") as f:
+    json.dump(all_orders, f, indent=4)
 
-
-def get_exchange_info():
-    """Get exchange trading pairs and info."""
-    url = f"{BASE_URL}/v3/exchangeInfo"
-    try:
-        res = requests.get(url)
-        res.raise_for_status()
-        return res.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error getting exchange info: {e}")
-        return None
-
-
-def get_ticker(pair=None):
-    """Get ticker for one or all pairs."""
-    url = f"{BASE_URL}/v3/ticker"
-    params = {'timestamp': _get_timestamp()}
-    if pair:
-        params['pair'] = pair
-    try:
-        res = requests.get(url, params=params)
-        res.raise_for_status()
-        return res.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error getting ticker: {e}")
-        return None
-
-
-# ------------------------------
-# Signed Endpoints
-# ------------------------------
-
-def get_balance():
-    """Get wallet balances (RCL_TopLevelCheck)."""
-    url = f"{BASE_URL}/v3/balance"
-    headers, payload, _ = _get_signed_headers({})
-    try:
-        res = requests.get(url, headers=headers, params=payload)
-        res.raise_for_status()
-        return res.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error getting balance: {e}")
-        print(f"Response text: {e.response.text if e.response else 'N/A'}")
-        return None
-
-
-def get_pending_count():
-    """Get total pending order count."""
-    url = f"{BASE_URL}/v3/pending_count"
-    headers, payload, _ = _get_signed_headers({})
-    try:
-        res = requests.get(url, headers=headers, params=payload)
-        res.raise_for_status()
-        return res.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error getting pending count: {e}")
-        print(f"Response text: {e.response.text if e.response else 'N/A'}")
-        return None
-
-
-def place_order(pair_or_coin, side, quantity, price=None, order_type=None):
-    """
-    Place a LIMIT or MARKET order.
-    """
-    url = f"{BASE_URL}/v3/place_order"
-    pair = f"{pair_or_coin}/USD" if "/" not in pair_or_coin else pair_or_coin
-
-    if order_type is None:
-        order_type = "LIMIT" if price is not None else "MARKET"
-
-    if order_type == 'LIMIT' and price is None:
-        print("Error: LIMIT orders require 'price'.")
-        return None
-
-    payload = {
-        'pair': pair,
-        'side': side.upper(),
-        'type': order_type.upper(),
-        'quantity': str(quantity)
-    }
-    if order_type == 'LIMIT':
-        payload['price'] = str(price)
-
-    headers, _, total_params = _get_signed_headers(payload)
-    headers['Content-Type'] = 'application/x-www-form-urlencoded'
-
-    try:
-        res = requests.post(url, headers=headers, data=total_params)
-        res.raise_for_status()
-        return res.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error placing order: {e}")
-        print(f"Response text: {e.response.text if e.response else 'N/A'}")
-        return None
-
-
-def query_order(order_id=None, pair=None, pending_only=None):
-    """Query order history or pending orders."""
-    url = f"{BASE_URL}/v3/query_order"
-    payload = {}
-    if order_id:
-        payload['order_id'] = str(order_id)
-    elif pair:
-        payload['pair'] = pair
-        if pending_only is not None:
-            payload['pending_only'] = 'TRUE' if pending_only else 'FALSE'
-
-    headers, _, total_params = _get_signed_headers(payload)
-    headers['Content-Type'] = 'application/x-www-form-urlencoded'
-
-    try:
-        res = requests.post(url, headers=headers, data=total_params)
-        res.raise_for_status()
-        return res.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error querying order: {e}")
-        print(f"Response text: {e.response.text if e.response else 'N/A'}")
-        return None
-
-
-def cancel_order(order_id=None, pair=None):
-    """Cancel specific or all pending orders."""
-    url = f"{BASE_URL}/v3/cancel_order"
-    payload = {}
-    if order_id:
-        payload['order_id'] = str(order_id)
-    elif pair:
-        payload['pair'] = pair
-
-    headers, _, total_params = _get_signed_headers(payload)
-    headers['Content-Type'] = 'application/x-www-form-urlencoded'
-
-    try:
-        res = requests.post(url, headers=headers, data=total_params)
-        res.raise_for_status()
-        return res.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error canceling order: {e}")
-        print(f"Response text: {e.response.text if e.response else 'N/A'}")
-        return None
-
-
-# ------------------------------
-# Quick Demo Section
-# ------------------------------
-if __name__ == "__main__":
-    print("\n--- Checking Server Time ---")
-    print(check_server_time())
-
-    print("\n--- Getting Exchange Info ---")
-    info = get_exchange_info()
-    if info:
-        pairs = list(info.get('TradePairs', {}).keys())
-        print(f"Available Pairs: {list(pairs)}")
-    with open("exchange.txt", "w") as file:
-        json.dump(pairs, file, indent=4)
-
-    print("\n--- Getting Market Ticker (BTC/USD) ---")
-    ticker = get_ticker("BTC/USD")
-    if ticker:
-        print(ticker.get("Data", {}).get("BTC/USD", {}))
-
-    print("\n--- Getting Account Balance ---")
-    balance = get_balance()
-    print(balance)
-    with open("balance.txt", "w") as file:
-        file.write("Bank Balance\n")
-        json.dump(balance, file, indent=4)
-        file.write("\n\n")
-
-    print("\n--- Placing Orders ---")
-    # Uncomment these to test trading actions:
-    # print(place_order("BTC", "BUY", 0.01, price=95000))  # LIMIT
-    buy = place_order("BNB/USD", "BUY", 1)
-    print(buy)
-    # print(place_order("BNB/USD", "SELL", 1))             # MARKET   
-    query = query_order(pair="BNB/USD", pending_only=False)    
-    print(query)
-    # print(cancel_order(pair="BNB/USD"))
-    with open("orders.txt", "w") as file:
-        file.write("Orders\n\n")
-        json.dump(buy, file, indent=4)
-        file.write("\n\nQuery Results\n\n")
-        json.dump(query, file, indent=4)
-
-    print("\n--- Checking Pending Orders ---")
-    pending = get_pending_count()
-    print(f"Pending Orders: {pending}")
-    with open("pending.txt", "a") as file:
-        file.write("Pending Orders\n")
-        json.dump(pending, file, indent=4)
+print("\nTrading bot execution completed. Query results saved to query_order_results.txt")

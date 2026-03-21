@@ -1,5 +1,7 @@
 import json
 
+all_actions = {}
+
 with open("../data/binanceDataReturns.txt", "r") as file:
     data = json.load(file)
     print(f"Processing {len(data)} pairs from binanceDataReturns.txt...")
@@ -26,4 +28,5 @@ with open("../data/binanceDataReturns.txt", "r") as file:
                     print(f"Skipping action determination for index {i} due to invalid return data.")
                     continue
 
-            json.dump({pair: action}, file, indent=4)
+            all_actions[pair] = action
+        json.dump(all_actions, file, indent=4)
