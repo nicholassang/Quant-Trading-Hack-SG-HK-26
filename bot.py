@@ -219,7 +219,6 @@ if __name__ == "__main__":
         pairs = list(info.get('TradePairs', {}).keys())
         print(f"Available Pairs: {list(pairs)}")
     with open("exchange.txt", "w") as file:
-        file.write("Available Pairs\n")
         json.dump(pairs, file, indent=4)
 
     print("\n--- Getting Market Ticker (BTC/USD) ---")
