@@ -4,3 +4,7 @@ log.txt
 pending.txt
 orders.txt
 balance.txt
+binanceDataActions.txt
+binanceDataClosingPrices.txt
+binanceDataReturns.txt
+query_order_results.txt

@@ -28,7 +28,7 @@
     "WLFIUSDT": "SELL",
     "EIGENUSDT": "SELL",
     "LINEAUSDT": "SELL",
-    "1000CHEEMSUSDT": "BUY",
+    "1000CHEEMSUSDT": "SELL",
     "BIOUSDT": "SELL",
     "LISTAUSDT": "SELL",
     "AVAXUSDT": "SELL",
